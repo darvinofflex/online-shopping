@@ -1,0 +1,71 @@
+{% extends 'shoopingapp/base.html'%}
+
+{%  block content%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="thumbnail">
+                <img src="{{ product.cover.url }}" class="img img-thumbnail img img responsive">
+                <div class="caption">
+                    <h4>{{ product.name}}</h4>
+            </div>
+        </div>
+    </div>
+        <div class="col-sm-9">
+        <ul class="nav nav-pills">
+            <li role="presentation"class="active"><a href="{% url 'shoopingapp:add_item' product.id %}">Item</a></li>
+            <li role="presentation"><a href="">Add Product</a></li>
+        </ul>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="text-center">PRODUCTS</h3>
+            </div>
+
+            <div class="panel-body">
+                {% if message %}
+                <p class="text-success">{{ message }}</p>
+                {% endif %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Available</th>
+                    </tr>
+                    </thead>
+
+                    {% if product.name_set %}
+                        {% for product in product.name_set.all %}
+                    <tr>
+                        <td>{{ product.product_name }}</td>
+                        <td>
+                            <a target="_blank" href="">
+                                <button type="button" class="btn btn-success btn-xs">
+                                    <span class="glyphicon glyphicon-check"></span>&nbsp;product
+                                </button>
+                            </a>
+
+                        </td>
+
+                        <td>
+                            <a href="{% url 'shooping:delete_song' product.id %}">
+                                <button type="button" class="btn btn-danger btn-xs">
+                                    <span class="glyphicon glyphicon-trash"></span>&nbsp;Cancel
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+
+        </div>
+        </div>
+</div>
+    </div>
+
+</div>
+
+
+{% endblock %}
